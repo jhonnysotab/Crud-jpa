@@ -17,4 +17,6 @@ public interface ProductService {
 
     Optional<Product> delete(Long id);
 
+    Boolean sku(String sku);
+
 }

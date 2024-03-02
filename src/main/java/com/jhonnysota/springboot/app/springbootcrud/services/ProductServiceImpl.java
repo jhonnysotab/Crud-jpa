@@ -51,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> product2 = repository.findById(id);
         if(product2.isPresent()){
             Product pro = product2.orElseThrow();
+            pro.setsku(product.getsku()== null ? pro.getsku(): product.getsku());
             pro.setName(product.getName()== null ? pro.getName(): product.getName());
             pro.setDescription(product.getDescription()== null ? pro.getDescription(): product.getDescription());
             pro.setPrice(product.getPrice()== 0 ? pro.getPrice(): product.getPrice());
@@ -59,5 +60,11 @@ public class ProductServiceImpl implements ProductService {
         }
         return product2;
 
+    }
+
+    @Override
+    public Boolean sku(String sku) {
+        
+        return repository.existsBySku(sku);
     }
 }

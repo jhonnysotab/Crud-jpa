@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jhonnysota.springboot.app.springbootcrud.ProductValidation;
 import com.jhonnysota.springboot.app.springbootcrud.entities.Product;
 import com.jhonnysota.springboot.app.springbootcrud.services.ProductService;
 
@@ -27,7 +28,8 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
-
+    // @Autowired
+    // ProductValidation productValidation;
     @Autowired
     ProductService service;
 
@@ -47,7 +49,8 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<?> product(@Valid  @RequestBody Product product,BindingResult result){
-       if(result.hasFieldErrors()){
+        // productValidation.validate(product,result);
+        if(result.hasFieldErrors()){
         return validation(result);
     }
     return ResponseEntity.status(HttpStatus.CREATED).body(service.save(product));
